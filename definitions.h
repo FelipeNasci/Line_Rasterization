@@ -45,9 +45,9 @@ void putPixel (Point point);
 void interpolaCor (Point *pointA, Point pointB, Color *cor_aux);
 
 
-//  FUNCOES AUXILIARES
-short sinal(int value);
-short between_0_1 (int value, int distance);
+//  EXTRAS
+void fill_Triangle(Point pointA, Point pointB, Point PointC);
+
 
 //  FUNCAO DE TESTE
 void pixel();
