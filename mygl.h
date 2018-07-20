@@ -50,22 +50,22 @@ void interpolaCor(Point *pointA, Point pointB)
     /*****          GERA DISCREPANCIA DE CORES NA INTERPOLACAO          *****/
     /************************************************************************/
 
-    if (pointA ->color.r < 0 || pointA ->color.r > 255)
+    if (pointA ->color.r < 0 || pointA -> color.r > 255)
         pointA -> color.r = pointB.color.r;
     else
         pointA -> color.r += cor_aux.r;
 
-    if (pointA ->color.g < 0 || pointA ->color.g > 255)
+    if (pointA ->color.g < 0 || pointA -> color.g > 255)
         pointA -> color.g = pointB.color.g;
     else
         pointA -> color.g += cor_aux.g;
 
-    if (pointA ->color.b < 0 || pointA ->color.b > 255)
+    if (pointA ->color.b < 0 || pointA -> color.b > 255)
         pointA -> color.b = pointB.color.b;
     else
         pointA -> color.b += cor_aux.b;
 
-    if (pointA ->color.a < 0 || pointA ->color.a > 255)
+    if (pointA ->color.a < 0 || pointA -> color.a > 255)
         pointA -> color.a = pointB.color.b;
     else
         pointA -> color.a += cor_aux.a;
@@ -210,6 +210,8 @@ void drawTriangle()
 
     int top_H, right, left, height;
 
+    // PRIMEIRO TRIANGULO
+
         point1.x = 40;
         point1.y = 10;
 
@@ -219,9 +221,28 @@ void drawTriangle()
         point3.x = 60;
         point3.y = 120;
 
-        bresehan(point1, point2);
-        bresehan(point1, point3);
-        bresehan(point2, point3);
+        fill_Triangle(point1, point2, point3);
+
+//        bresehan(point1, point2);
+//        bresehan(point1, point3);
+//        bresehan(point2, point3);
+
+
+    //------------------------------------------
+    point1.color.r = 255;
+    point1.color.g = 0;
+    point1.color.b = 255;
+
+    point2.color.r = 100;
+    point2.color.g = 0;
+    point2.color.b = 100;
+
+    point3.color.r = 150;
+    point3.color.g = 0;
+    point3.color.b = 0;
+
+
+    //  SEGUNDO TRIANGULO
 
         point1.x = 70;
         point1.y = 10;
@@ -232,9 +253,16 @@ void drawTriangle()
         point3.x = 90;
         point3.y = 120;
 
+
+//        fill_Triangle(point1, point2, point3);
+
         bresehan(point1, point2);
         bresehan(point1, point3);
         bresehan(point2, point3);
+
+    //------------------------------------------
+
+    //  TERCEIRO TRIANGULO
 
         point1.x = 300;
         point1.y = 20;
@@ -245,9 +273,12 @@ void drawTriangle()
         point3.x = 400;
         point3.y = 110;
 
-        bresehan(point1, point2);
-        bresehan(point1, point3);
-        bresehan(point2, point3);
+        fill_Triangle(point1, point2, point3);
+
+//        bresehan(point1, point2);
+//        bresehan(point1, point3);
+//        bresehan(point2, point3);
+
 
 
 
@@ -264,10 +295,6 @@ void bresehan(Point pointA, Point pointB)
 {
 
     if( pointA.x > pointB.x ){
-
-        //Color aux = pointA.color;
-        //pointA.color = pointB.color;
-        //pointB.color = aux;
 
         bresehan(pointB, pointA);
         return;
@@ -361,6 +388,83 @@ void bresehan(Point pointA, Point pointB)
 }
 
 
+
+void fill_Triangle( Point pointA, Point pointB, Point pointC )
+{
+
+if( pointB.x > pointC.x ){
+
+        fill_Triangle(  pointA, pointC, pointB );
+        return;
+    }
+
+    bresehan(pointA, pointB);
+
+    int dx, dy, inc_E, inc_NE, d_new;
+    short slope = 1;
+
+    dy = pointC.y - pointB.y;
+    dx = pointC.x - pointB.x;
+
+    if( abs(dx) >= abs(dy))
+    {
+        if( dy < 0){
+            slope = -slope;
+            dy = -dy;
+        }
+
+        d_new = 2*dy - dx;
+        inc_E = 2*dy;
+        inc_NE = 2*dy - 2*dx;
+
+        while(pointB.x <= pointC.x){
+
+
+            pointB.x++;
+
+            if (d_new < 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointB.y += slope;
+            }
+                bresehan(pointA, pointB);
+
+        }
+    }
+    else
+    {
+        if(dy > 0)
+            slope = -1;
+
+        d_new = dy + slope * 2*dx;
+        inc_E = slope * 2*dx;
+        inc_NE = 2*dy + slope * 2*dx;
+
+
+        if(slope < 0){
+            inc_E = -inc_E;
+            inc_NE = -inc_NE;
+        }
+
+        while(pointB.y != pointC.y){
+
+            pointB.y += -slope;
+
+            if (d_new < 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointB.x ++;
+            }
+
+           bresehan(pointA, pointB);
+        }
+    }
+
+
+}
+
 /******************************************************/
 /*******     PLOTA O PIXEL DE DETERMINADA       *******/
 /*******            COR NA TELA                 *******/
@@ -422,8 +526,6 @@ void pixel()
         quantPontos++;
         printf("Numero de Pontos = %d \n", quantPontos);
      }
-
-    //system("Pause");
 }
 
 
@@ -462,7 +564,7 @@ void equacao_geral_reta( Point pointA, Point pointB )
     if(dy < dx){
 
         m = dy / dx;
-        b = -m * pointA.x + pointA.y;
+        b = pointA.y - ( m * pointA.x );
 
         while (pointA.x <= pointB.x)
         {
@@ -487,7 +589,7 @@ void equacao_geral_reta( Point pointA, Point pointB )
         else
         {
             m = dx / dy;
-            b = -m * pointA.y + pointA.x;
+            b = pointA.x - ( m * pointA.y );
 
             while (pointA.y <= pointB.y)
             {

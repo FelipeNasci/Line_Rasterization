@@ -1,12 +1,8 @@
 #include "main.h"
 
-void teste1();
-void test2();
-void test3();
-
-int x = 512, y = 0;
-int incx = 0, incy = 1;
-int a = 1;
+void Eq_Reta_Test();
+void DDA_Test();
+void Breseham_Test();
 
 //-----------------------------------------------------------------------------
 
@@ -16,7 +12,7 @@ void MyGlDraw(void) {
     // Chame aqui as funções do mygl.h
     //************************************************************************
 
-/*
+
     Point axis, axis1;
 
     axis1.color.r = 0;
@@ -39,21 +35,20 @@ void MyGlDraw(void) {
     axis1.y = IMAGE_HEIGHT;
     bresehan(axis,axis1);
 
-*/
 
-    //teste1();
-    //test2();
-    //test3();
-    //test();
 
-    drawLine();
-    //drawTriangle();
+      Eq_Reta_Test();
+    //  DDA_Test();
+    //  Breseham_Test();
+
+    //  drawLine();
+      drawTriangle();
 
 
 
 }
 
-void teste1()
+void Eq_Reta_Test()
 {
 
     Point  p1, p2;
@@ -119,7 +114,7 @@ void teste1()
 }
 
 
-void test2()
+void DDA_Test()
 {
 
 Point  p1, p2;
@@ -186,10 +181,8 @@ Point  p1, p2;
 }
 
 
-void test3()
+void Breseham_Test()
 {
-
-/*
 
 Point  p1, p2;
 
@@ -251,9 +244,6 @@ Point  p1, p2;
     p2.x = IMAGE_WIDTH;
     p2.y = IMAGE_HEIGHT / 4 + IMAGE_HEIGHT / 2;
     bresehan(p1,p2);
-
-*/
-
 
 }
 
