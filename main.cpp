@@ -2,7 +2,7 @@
 
 void Eq_Reta_Test();
 void DDA_Test();
-void Breseham_Test();
+void Bresenham_Test();
 
 //-----------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ void MyGlDraw(void) {
     axis.y = IMAGE_HEIGHT / 2;
     axis1.x = IMAGE_WIDTH;
     axis1.y = IMAGE_HEIGHT / 2;
-    bresehan(axis,axis1);
+    //drawLine(axis,axis1);
 
     /////////////////////////////////
     //          EIXO Y             //
@@ -33,16 +33,18 @@ void MyGlDraw(void) {
     axis.y = 0;
     axis1.x = IMAGE_WIDTH / 2;
     axis1.y = IMAGE_HEIGHT;
-    bresehan(axis,axis1);
+    //drawLine(axis,axis1);
 
 
 
-      Eq_Reta_Test();
+    //  Eq_Reta_Test();
     //  DDA_Test();
-    //  Breseham_Test();
+      Bresenham_Test();
 
-    //  drawLine();
-      drawTriangle();
+    //  drawTriangle();
+
+    //  line();
+    //  pixel();
 
 
 
@@ -181,33 +183,86 @@ Point  p1, p2;
 }
 
 
-void Breseham_Test()
+void Bresenham_Test()
 {
+    Point axis, axis1;
+    Point  p1, p2;
 
-Point  p1, p2;
+    /////////////////////////////////
+    //          EIXO X             //
+    /////////////////////////////////
+    axis.x = IMAGE_WIDTH / 2;
+    axis.y = IMAGE_HEIGHT / 2;
+
+    //  COR
+    axis.color.r = 0;
+    axis.color.g = 255;
+    axis.color.b = 255;
+
+    axis1.x = IMAGE_WIDTH;
+    axis1.y = IMAGE_HEIGHT / 2;
+
+    //  COR
+    axis1.color.r = 0;
+    axis1.color.g = 0;
+    axis1.color.b = 255;
+
+    drawLine(axis,axis1);       //  DESENHA A LINHA
+
+    axis1.x = 0;
+    axis1.y = IMAGE_HEIGHT / 2;
+
+    drawLine(axis,axis1);
+
+    /////////////////////////////////
+    //            EIXO Y           //
+    /////////////////////////////////
+
+    axis.x = IMAGE_WIDTH / 2;
+    axis.y = IMAGE_HEIGHT / 2;
+
+    axis1.x = IMAGE_WIDTH / 2;
+    axis1.y = IMAGE_HEIGHT;
+
+    drawLine(axis,axis1);
+
+    axis1.x = IMAGE_WIDTH / 2;
+    axis1.y = 0;
+
+    drawLine(axis,axis1);
 
 
     //////////////////////////////////
     //  SEPARACAO DE QUADRANTES     //
     //////////////////////////////////
 
+    p1.color.r = 0;
+    p1.color.g = 150;
+    p1.color.b = 255;
+
+    p2.color.r = 180;
+    p2.color.g = 255;
+    p2.color.b = 0;
+
     p1.x = IMAGE_WIDTH / 2;
     p1.y = IMAGE_HEIGHT / 2;
+
+
     p2.x = IMAGE_WIDTH;
     p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = 0;
     p2.y = 0;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = IMAGE_WIDTH;
     p2.y = 0;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = 0;
     p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     ///////////////////////////////////
     //  SEPARACAO DE OCTANTES        //
@@ -215,35 +270,35 @@ Point  p1, p2;
 
     p2.x = IMAGE_WIDTH / 4;
     p2.y = 0;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = IMAGE_WIDTH / 4;
     p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = IMAGE_WIDTH / 4 + IMAGE_WIDTH / 2;
     p2.y = 0;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = IMAGE_WIDTH / 4 + IMAGE_WIDTH / 2;
     p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = 0;
     p2.y = IMAGE_HEIGHT / 4;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = IMAGE_WIDTH;
     p2.y = IMAGE_HEIGHT / 4;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = 0;
     p2.y = IMAGE_HEIGHT / 4 + IMAGE_HEIGHT / 2;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
     p2.x = IMAGE_WIDTH;
     p2.y = IMAGE_HEIGHT / 4 + IMAGE_HEIGHT / 2;
-    bresehan(p1,p2);
+    drawLine(p1,p2);
 
 }
 

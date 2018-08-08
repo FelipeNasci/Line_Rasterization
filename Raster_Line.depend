@@ -324,3 +324,24 @@
 	<time.h>
 	<math.h>
 
+1533769188 source:c:\users\diego felipe\desktop\line_rasterization-master_3\line_rasterization-master\main.cpp
+	"main.h"
+
+1532109282 c:\users\diego felipe\desktop\line_rasterization-master_3\line_rasterization-master\main.h
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<iostream>
+	"definitions.h"
+	"mygl.h"
+
+1533769416 c:\users\diego felipe\desktop\line_rasterization-master_3\line_rasterization-master\definitions.h
+
+1533769576 c:\users\diego felipe\desktop\line_rasterization-master_3\line_rasterization-master\mygl.h
+	"definitions.h"
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	<math.h>
+

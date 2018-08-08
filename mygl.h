@@ -13,7 +13,6 @@
 //*****************************************************************************
 // Defina aqui as suas funções gráficas
 
-    int quantPontos = 0;
 
 
 
@@ -72,131 +71,6 @@ void interpolaCor(Point *pointA, Point pointB)
 
 }
 
-/******************************************************/
-/*******        DESENHA LINHAS NA TELA          *******/
-/******************************************************/
-
-void drawLine()
-{
-
-    Point axis, axis1;
-    Point  p1, p2;
-
-    /////////////////////////////////
-    //          EIXO X             //
-    /////////////////////////////////
-    axis.x = IMAGE_WIDTH / 2;
-    axis.y = IMAGE_HEIGHT / 2;
-
-    //  COR
-    axis.color.r = 0;
-    axis.color.g = 255;
-    axis.color.b = 255;
-
-    axis1.x = IMAGE_WIDTH;
-    axis1.y = IMAGE_HEIGHT / 2;
-
-    //  COR
-    axis1.color.r = 0;
-    axis1.color.g = 0;
-    axis1.color.b = 255;
-
-    bresehan(axis,axis1);       //  DESENHA A LINHA
-
-    axis1.x = 0;
-    axis1.y = IMAGE_HEIGHT / 2;
-
-    bresehan(axis,axis1);
-
-    /////////////////////////////////
-    //            EIXO Y           //
-    /////////////////////////////////
-
-    axis.x = IMAGE_WIDTH / 2;
-    axis.y = IMAGE_HEIGHT / 2;
-
-    axis1.x = IMAGE_WIDTH / 2;
-    axis1.y = IMAGE_HEIGHT;
-
-    bresehan(axis,axis1);
-
-    axis1.x = IMAGE_WIDTH / 2;
-    axis1.y = 0;
-
-    bresehan(axis,axis1);
-
-
-    //////////////////////////////////
-    //  SEPARACAO DE QUADRANTES     //
-    //////////////////////////////////
-
-    p1.color.r = 0;
-    p1.color.g = 150;
-    p1.color.b = 255;
-
-    p2.color.r = 180;
-    p2.color.g = 255;
-    p2.color.b = 0;
-
-    p1.x = IMAGE_WIDTH / 2;
-    p1.y = IMAGE_HEIGHT / 2;
-
-
-    p2.x = IMAGE_WIDTH;
-    p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
-
-    p2.x = 0;
-    p2.y = 0;
-    bresehan(p1,p2);
-
-    p2.x = IMAGE_WIDTH;
-    p2.y = 0;
-    bresehan(p1,p2);
-
-    p2.x = 0;
-    p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
-
-    ///////////////////////////////////
-    //  SEPARACAO DE OCTANTES        //
-    //////////////////////////////////
-
-    p2.x = IMAGE_WIDTH / 4;
-    p2.y = 0;
-    bresehan(p1,p2);
-
-    p2.x = IMAGE_WIDTH / 4;
-    p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
-    //system("Pause");
-
-    p2.x = IMAGE_WIDTH / 4 + IMAGE_WIDTH / 2;
-    p2.y = 0;
-    bresehan(p1,p2);
-
-    p2.x = IMAGE_WIDTH / 4 + IMAGE_WIDTH / 2;
-    p2.y = IMAGE_HEIGHT;
-    bresehan(p1,p2);
-
-    p2.x = 0;
-    p2.y = IMAGE_HEIGHT / 4;
-    bresehan(p1,p2);
-
-    p2.x = IMAGE_WIDTH;
-    p2.y = IMAGE_HEIGHT / 4;
-    bresehan(p1,p2);
-
-    p2.x = 0;
-    p2.y = IMAGE_HEIGHT / 4 + IMAGE_HEIGHT / 2;
-    bresehan(p1,p2);
-
-    p2.x = IMAGE_WIDTH;
-    p2.y = IMAGE_HEIGHT / 4 + IMAGE_HEIGHT / 2;
-    bresehan(p1,p2);
-
-}
-
 
 /******************************************************/
 /*******       DESENHA TRIANGULOS NA TELA       *******/
@@ -208,27 +82,24 @@ void drawTriangle()
     Color cor;
     Point point1, point2, point3;
 
-    int top_H, right, left, height;
-
     // PRIMEIRO TRIANGULO
 
-        point1.x = 40;
-        point1.y = 10;
+    point1.x = 40;
+    point1.y = 10;
 
-        point2.x = 20;
-        point2.y = 120;
+    point2.x = 20;
+    point2.y = 120;
 
-        point3.x = 60;
-        point3.y = 120;
+    point3.x = 60;
+    point3.y = 120;
 
-        fill_Triangle(point1, point2, point3);
+    fill_Triangle(point1, point2, point3);
 
-//        bresehan(point1, point2);
-//        bresehan(point1, point3);
-//        bresehan(point2, point3);
+//  drawLine(point1, point2);
+//  drawLine(point1, point3);
+//  drawLine(point2, point3);
+//------------------------------------------
 
-
-    //------------------------------------------
     point1.color.r = 255;
     point1.color.g = 0;
     point1.color.b = 255;
@@ -256,9 +127,9 @@ void drawTriangle()
 
 //        fill_Triangle(point1, point2, point3);
 
-        bresehan(point1, point2);
-        bresehan(point1, point3);
-        bresehan(point2, point3);
+        drawLine(point1, point2);
+        drawLine(point1, point3);
+        drawLine(point2, point3);
 
     //------------------------------------------
 
@@ -275,28 +146,25 @@ void drawTriangle()
 
         fill_Triangle(point1, point2, point3);
 
-//        bresehan(point1, point2);
-//        bresehan(point1, point3);
-//        bresehan(point2, point3);
-
-
-
+//        drawLine(point1, point2);
+//        drawLine(point1, point3);
+//        drawLine(point2, point3);
 
 }
 
 
 /******************************************************/
-/*******   ALGORITMO DE BRESEHAN - PONTO MEDIO  *******/
+/*******  ALGORITMO DE BRESENHAM - PONTO MEDIO  *******/
 /*******    PARA RASTERIZAR LINHAS UTILIZANDO   *******/
 /*******          APENAS NUMEROS INTEIROS       *******/
 /******************************************************/
 
-void bresehan(Point pointA, Point pointB)
+void drawLine(Point pointA, Point pointB)
 {
 
     if( pointA.x > pointB.x ){
 
-        bresehan(pointB, pointA);
+        drawLine(pointB, pointA);
         return;
     }
 
@@ -387,7 +255,10 @@ void bresehan(Point pointA, Point pointB)
 
 }
 
-
+/******************************************************/
+/*******     PREENCHE UM TRIANGULO DADO         *******/
+/*******            DETERMINADA COR             *******/
+/******************************************************/
 
 void fill_Triangle( Point pointA, Point pointB, Point pointC )
 {
@@ -398,7 +269,7 @@ if( pointB.x > pointC.x ){
         return;
     }
 
-    bresehan(pointA, pointB);
+    drawLine(pointA, pointB);
 
     int dx, dy, inc_E, inc_NE, d_new;
     short slope = 1;
@@ -428,7 +299,7 @@ if( pointB.x > pointC.x ){
                 d_new += inc_NE;
                 pointB.y += slope;
             }
-                bresehan(pointA, pointB);
+                drawLine(pointA, pointB);
 
         }
     }
@@ -458,7 +329,7 @@ if( pointB.x > pointC.x ){
                 pointB.x ++;
             }
 
-           bresehan(pointA, pointB);
+           drawLine(pointA, pointB);
         }
     }
 
@@ -490,44 +361,6 @@ unsigned int offset(Point point)
     return point.x * 4 + point.y * IMAGE_WIDTH * 4;
 }
 
-/******************************************************/
-/*******     TESTE DA FUNCAO PUT_PIXEL()        *******/
-/*******     IMPRESSAO DE VARIOS PONTOS         *******/
-/******************************************************/
-
-
-void pixel()
-{
-    int limite = 10000;                        //GERA 10 PONTOS
-
-    Point a;
-
-    Color cor1, cor2;
-
-    cor1.g = 0;
-    cor1.b = 0;
-    cor1.r = 255;
-
-    srand( (unsigned) time(NULL));          //GERA NUMEROS ALEATORIOS
-
-     for (int i = 0; i < limite; i++)
-     {
-        a.x = rand() % IMAGE_WIDTH;
-        a.y = rand() % IMAGE_HEIGHT;
-
-            if(a.x % 2 == 0){
-                a.color = cor1;
-                putPixel(a);
-            }
-            else{
-                a.color = cor2;
-                putPixel(a);
-            }
-        quantPontos++;
-        printf("Numero de Pontos = %d \n", quantPontos);
-     }
-}
-
 
 /******************************************************/
 /*******  RASTERIZA LINHAS A PARTIR DA EQUACAO  *******/
@@ -540,14 +373,10 @@ void equacao_geral_reta( Point pointA, Point pointB )
     /**     y - y0 = m(x - x0)    **/   //x0 e y0 sao o ponto inicial
     /**     y - y0 = mx + (-mx0)  **/
     /**     y = mx + (-mx0 + y0)  **/
-    /**     y = mx + b            **/   //Equacao Reduzida
+    /**     y = mx + b            **/   //Equacao Reduzida da reta
     /*******************************/
 
-    Color color;
-
-    GLfloat dx, dy, b;
-    GLfloat m;
-    int add = 1;
+    GLfloat dx, dy, b, m;
 
     if( pointA.x > pointB.x ){
         equacao_geral_reta( pointB,  pointA);
@@ -556,51 +385,51 @@ void equacao_geral_reta( Point pointA, Point pointB )
 
     dy = pointB.y - pointA.y;
     dx = pointB.x - pointA.x;
-/*
-    printf("Dy = %f \n", dy);
-    printf("Dx = %f \n", dx);
-    printf("m = %f \n", m);
-*/
-    if(dy < dx){
+
+    //Angulo da reta = 90º -> RETA VERTICAL
+
+    if(dx == 0){
+
+        while (pointA.y <= pointB.y)
+        {
+            putPixel(pointA);
+            pointA.y++;
+        }
+        return;
+    }
+
+
+    //Angulo da reta < 1
+
+    if(dx > dy){
 
         m = dy / dx;
         b = pointA.y - ( m * pointA.x );
 
-        while (pointA.x <= pointB.x)
-        {
-            pointA.y = round( ( m * pointA.x ) + b );
-            putPixel(pointA);
-
-            pointA.x += add;
-        }
-
-    }
-    else{
-
-        if(dx == 0)
-        {
-            while (pointA.y <= pointB.y)
+            while (pointA.x < pointB.x)
             {
                 putPixel(pointA);
-                pointA.y += add;
+
+                pointA.x++;
+                pointA.y = round( ( m * pointA.x ) + b );
+
             }
-        }
 
-        else
-        {
-            m = dx / dy;
-            b = pointA.x - ( m * pointA.y );
+    } else {
 
-            while (pointA.y <= pointB.y)
+        m = dx / dy;
+        b = pointA.x - ( m * pointA.y );
+
+            while (pointA.y < pointB.y)
             {
+
+                putPixel(pointA);
+
+                pointA.y++;
                 pointA.x = round( (m * pointA.y) + b ) ;
-                putPixel(pointA);
 
-                pointA.y += add;
             }
-        }
     }
-
 
 }
 
@@ -617,9 +446,9 @@ void DDA (Point pointA, Point pointB)
 
     //  AO CONTRARIO DA EQUACAO GERAL DA RETA, ESTE
     //  ALGORITMO NAO UTILIZA DE UMA 'FORMULA' PARA
-    //  ENCONTRAR O PROXIMO PIXEL QUE DEVE SER ACESO.
+    //  ENCONTRAR O PROXIMO PIXEL A SER LIGADO.
 
-    //  INCREMENTA-SE X ATE CHEGAR AO X FINAL E
+    //  INCREMENTA-SE X ATE CHEGAR AO X_FINAL E
     //  AO MESMO TEMPO ADICIONA-SE A INCLICACAO DA
     //  RETA A Y.
 
@@ -629,15 +458,16 @@ void DDA (Point pointA, Point pointB)
     //  NUMERO REAL.
 
     //  ESTE CODIGO TEM VANTAGEM SOBRE A EQUACAO GERAL
-    //  DA RETA POIS NAO EH NECESSARIO REALIZAR DIVERSAS
-    //  MULTIPLICACOES E ARREDONDAMENTOS (O QUE ACABA
-    //   TORNANDO-O) UM ALGORITMO CARO.
+    //  DA RETA, POIS NAO EH NECESSARIO REALIZAR DIVERSAS
+    //  MULTIPLICACOES (O QUE FAZ DA EQ. DA RETA UM
+    //  ALGORITMO CARO).
 
     //  POREM ESTE ALGORITMO AINDA PODE SER MELHORADO
     //  TENDO EM VISTA QUE ELE AINDA TRABALHA COM NUMEROS
     //  REAIS E ARREDONDAMENTOS
 
     ********************************************************/
+
 
     if(pointA.y > pointB.y){
         DDA(pointB, pointA);
@@ -704,7 +534,7 @@ void DDA (Point pointA, Point pointB)
                 aux += 1;
                 pointA.x --;
             }
-            else if (aux >= 0.5){
+            else {
                 aux -= 1;
                 pointA.x ++;
             }
@@ -713,31 +543,108 @@ void DDA (Point pointA, Point pointB)
 
     }
 
-}
-
-short sinal(int value)
-{
-
-    if(value >= 0)
-        return 1;
-
-    return -1;
 
 }
 
-short between_0_1 (int value, int distance)
+
+/******************************************************/
+/*******     TESTE DA FUNCAO PUT_PIXEL()        *******/
+/*******     IMPRESSAO DE VARIOS PONTOS         *******/
+/******************************************************/
+
+
+void pixel()
 {
+    int limite = 999999;                        //GERA 10000 PONTOS
 
-    float aux = (float) value / (float) distance;
+    Point a;
 
-    if ( fabs(aux) > 0 && fabs(aux) < 1 )
-        return 1;
+    Color cor;
 
-    return 0;
+    cor.g = 0;
+    cor.b = 0;
+    cor.r = 0;
+
+    srand( (unsigned) time(NULL));          //GERA NUMEROS ALEATORIOS
+
+    clearScreen(cor);
+
+     for (int i = 0; i < limite; i++)
+     {
+        a.x = rand() % IMAGE_WIDTH;
+        a.y = rand() % IMAGE_HEIGHT;
+
+        a.color.r = rand() % 255;
+        a.color.g = rand() % 255;
+        a.color.b = rand() % 255;
+        a.color.a = rand() % 255;
+
+        putPixel(a);
+
+     }
 }
 
-void test()
-{
+/******************************************************/
+/*******     TESTE DA FUNCAO DRAWLINE()         *******/
+/*******     IMPRESSAO DE VARIAS RETAS          *******/
+/******************************************************/
+
+void line(){
+
+    Point pointA, pointB;
+
+    srand( (unsigned) time(NULL));          //GERA NUMEROS ALEATORIOS
+
+    int limite = 150;                        //  Limite de retas por frame
+
+    Color cor;
+    cor.r = 0;
+    cor.g = 20;
+    cor.b = 90;
+
+    clearScreen(cor);
+
+    for (int i = 0; i < limite; i++)
+    {
+        //pointA.x = IMAGE_WIDTH / 2;
+        //pointA.y = IMAGE_HEIGHT/ 2;
+        pointA.x = rand() % IMAGE_WIDTH;
+        pointA.y = rand() % IMAGE_HEIGHT;
+
+        pointA.color.r = rand() % 255;
+        pointA.color.g = rand() % 255;
+        pointA.color.b = rand() % 255;
+        pointA.color.a = rand() % 255;
+
+        pointB.x = rand() % IMAGE_WIDTH;
+        pointB.y = rand() % IMAGE_HEIGHT;
+
+        pointB.color.r = rand() % 255;
+        pointB.color.g = rand() % 255;
+        pointB.color.b = rand() % 255;
+        pointB.color.a = rand() % 255;
+
+        drawLine(pointA, pointB);
+
+     }
+
+}
+
+
+/******************************************************/
+/*******     LIMPA A TELA COM UMA COR           *******/
+/*******            PREDEFINIDA                 *******/
+/******************************************************/
+
+void clearScreen(Color cor){
+
+    Point p;
+
+    p.color = cor;
+
+    for(p.x = 0; p.x < IMAGE_WIDTH; p.x++)
+        for (p.y = 0; p.y < IMAGE_HEIGHT; p.y++)
+            putPixel(p);
 
 }
 

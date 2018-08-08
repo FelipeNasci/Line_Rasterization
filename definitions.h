@@ -30,11 +30,11 @@ typedef struct Point
 
 
 //  FUNCOES SOLICITADAS PELO PROFESSOR
-void drawLine();
+
 void drawTriangle();
 
 //  ALGORITMOS PARA RASTERIZAR LINHAS
-void bresehan(Point pointA, Point pointB);
+void drawLine(Point pointA, Point pointB);
 void DDA (Point pointA, Point pointB);
 void equacao_geral_reta(Point pointA, Point pointB);
 
@@ -51,6 +51,8 @@ void fill_Triangle(Point pointA, Point pointB, Point PointC);
 
 //  FUNCAO DE TESTE
 void pixel();
+void line();
+void clearScreen(Color cor);
 
 #endif // _DEFINITIONS_H_
 
