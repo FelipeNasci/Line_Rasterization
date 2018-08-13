@@ -2,7 +2,7 @@
 
 ## Sumário
 
-![Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
+[Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
 
 ## Introdução
 
