@@ -125,24 +125,28 @@ Também conhecido como algoritmo do ponto médio, é utilizado para traçar reta
 A ideia do algoritmo é bastante simples, ele utiliza a equação implícita da reta como uma função de decisão, para identificar qual o próximo pixel a ser ativado. Esta função é utilizada de forma incremental em cada pixel. Veja abaixo o desenvimento da Equação Implícita da Reta.
 
 ````
-y = mx + B                            //  Partimos da Equação Reduzida da Reta
-y = (dy/dx)* x + B                    //  Destrinchando 'm' obtemos '(dy/dx)'
-y * dx = dy * x + B * dx              //  Multiplicando a equação por 'dx'
-dy * x + (-y * dx) + B * dx = 0       //  Igualando a equação a 0
+y = mx + b                            //  Partimos da Equação Reduzida da Reta
+y = (dy/dx)* x + b                    //  Destrinchando 'm' obtemos '(dy/dx)'
+y * dx = dy * x + b * dx              //  Multiplicando a equação por 'dx'
+dy * x + (-y * dx) + b * dx = 0       //  Igualando a equação a 0
 ````
 
 Realizando as modificações abaixo para melhor entendimento posterior:
 
 ````
-a = dy
-b = dx
-c = B * dx
+α = dy
+ß = -dx
+c = b * dx
 ````
 
 Obtemos:
 ````
->decisão = f(x,y) = ax + by + c = 0
+decisão = f(x,y) = αx + ßy + c = 0
 ````
 
+Se aplicarmos um ponto na equação implícita e obtivemos 0 como resultado, significa que o ponto está sobre a reta.
 
+![Efeito_Eq_Implicita](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Efeito%20Equa%C3%A7%C3%A3o%20Impl%C3%ADcita.png?raw=true)
+
+Seja m = (x0 + 1, y0 + 1/2) o ponto médio entre os pixels  (x0 + 1, y0 + 1) e  (x0 + 1, y0), iremos utilizar a função de decisão para avaliar qual pixel acender.
 
