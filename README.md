@@ -40,15 +40,21 @@
   
   Estas cores são armazenadas em uma região de memória chamada _Color_Buffer_ , que é responsável por armazenar informações da imagem que será rasterizada na tela.
   
+  
   ![ColorBuffer](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/ColorBuffer.png?raw=true)
+  
   
   _OBS: Caso o computador não possua uma placa de vídeo dedicada, o Color_Buffer utiliza parte da memória RAM._
   
+  
   ![ColorBuffer](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/ColorBuffer2.png?raw=true)
+  
 
   Tendo em vista que o _Color_Buffer_ é uma região de memória, e a única informação que temos são pontos de coordenadas, utilizamos uma função _offset_ para encontrar a informação para determinada coordenada do monitor.
 
->   offset = 4 * (x + y * IMAGE_WIDTH)
+````C
+offset = 4 * (x + y * IMAGE_WIDTH);
+````
 
 _**OBS:** O _offset_ encontra a posição de memória de determinado ponto _(x,y)_ , para que seja selecionada uma cor se faz necessário acessar os canais correspondente a cor desejada e informar sua intensidade (0 até 255), como é demonstrado na função putPixel()._
 
@@ -61,16 +67,17 @@ void putPixel(Point point)
     FBptr[offset(point) + ALPHA] = point.color.a;		//ALPHA == 3
 }
 ````
+
 # Rasterização de linhas
 
 Após entender a interação entre monitores e computadores, os algoritmos para traçar retas serão entendidos sem maiores dificuldades.
 
 Antes de iniciar, assumimos que:
 
->   Δx ≥ Δy, ou seja, 0 <= angulo_reta <= 1
->   Nosso grid tem apenas coordenadas positivas (maior ou igual a 0)
-    >P(x0,y0) = (0,0)
->A distância entre cada pixel é 1
+* Δx ≥ Δy, ou seja, 0 <= angulo_reta <= 1
+* Nosso grid tem apenas coordenadas positivas (maior ou igual a 0)
+* P(x0,y0) = (0,0)
+* A distância entre cada pixel é 1
 
 Note que retas que possuem ângulos iguais a 0°, 45° e 90° são triviais de serem rasterizados.
 
@@ -93,14 +100,19 @@ y - y0 = (m * x) + (-m * x0)
      y = (m * x) + [ (-m * x0)  + y0 ]
      y = m * x + b
 ````
+
+
 ![Eq_Geral_Reta](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Equa%C3%A7%C3%A3o%20Geral.png?raw=true)
+
 
 Através desta equação podemos encontrar qualquer reta.
 OBS: _Devemos nos atentar nos casos em que:_
+
 ````
 Δx = 0 (pois inviabiliza a divisão Δy/Δx).
 Δx > Δx, isso nos obriga a trocar o valor dos pontos.
 ````
+
 A equação geral da reta é ineficiente em meios computacionais pois, para executá-la é necessário realizar multiplicações e arredondamentos de números reais a cada ponto que percorremos e isso torna o processamento lento.
 
 ### DDA
@@ -109,13 +121,14 @@ Uma alternativa mais leve é o Digital Differential Analyzer (DDA), o mesmo deri
 
 O algoritmo trabalha de forma incremental, adicionando a _y_ (encontrado na iteração anterior) o _Coeficiente Angular_ da reta. Vejamos seu desenvolvimento:
 
-
 Seja P(xi,yi) Um ponto a ser plotado no display.
+
 ````
 P(x0,y0) = y0 = m * xi + b      //Equação_Geral_Reta
 ````
 
 Então...
+
 ````
 yi + 1 = m * (xi + 1) + b
 yi + 1 = m * xi + m + b
@@ -123,7 +136,6 @@ yi + 1 = (m * xi +  b) + m
 yi + 1 = y_anterior + m
 yi + 1 = y + m
 ````
-**O próximo valor de 'y' é: valor_'y'_anterior adicionado ao 'coeficiente_angular_da_reta'**
 
 ![DDA](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/dda.png?raw=true)
 
