@@ -84,4 +84,60 @@ y - y0 = (m * x) + (-m * x0)
 ````
 ![Eq_Geral_Reta](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Equa%C3%A7%C3%A3o%20Geral.png?raw=true)
 
+Através desta equação podemos encontrar qualquer reta.
+OBS: _Devemos nos atentar nos casos em que:_
+````
+Δx = 0 (pois inviabiliza a divisão Δy/Δx).
+Δx > Δx, isso nos obriga a trocar o valor dos pontos.
+````
+A equação geral da reta é ineficiente em meios computacionais pois, para executá-la é necessário realizar multiplicações e arredondamentos de números reais a cada ponto que percorremos e isso torna o processamento lento.
+
+### DDA
+
+Uma alternativa mais leve é o Digital Differential Analyzer (DDA), o mesmo deriva da Equação Geral da Reta, porém, ao contrario da _Equação Geral da Reta_ , não é necessário realizar multiplicações a cada ponto encontrado.
+
+O algoritmo trabalha de forma incremental, adicionando a _y_ (encontrado na iteração anterior) o _Coeficiente Angular_ da reta. Vejamos seu desenvolvimento:
+
+
+Seja P(xi,yi) Um ponto a ser plotado no display.
+````
+P(x0,y0) = y0 = m * xi + b      //Equação_Geral_Reta
+````
+
+Então...
+````
+yi + 1 = m * (xi + 1) + b
+yi + 1 = m * xi + m + b
+yi + 1 = (m * xi +  b) + m
+yi + 1 = y_anterior + m
+yi + 1 = y + m
+````
+**O próximo valor de 'y' é: valor_'y'_anterior adicionado ao 'coeficiente_angular_da_reta'**
+
+![DDA](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/dda.png?raw=true)
+
+Este algoritmo ainda não é o ideal pois são necessários muitos arredondamentos de números reais. A seguir será apresentado uma solução melhor aplicável.
+
+### Algoritmo de Bresenham
+
+Também conhecido como algoritmo do ponto médio, é utilizado para traçar retas de forma incremental, trabalhando apenas com números inteiros.
+
+A ideia do algoritmo é bastante simples, ele utiliza a equação implícita da reta como uma função de decisão, para identificar qual o próximo pixel a ser ativado. Esta função é utilizada de forma incremental em cada pixel. Veja abaixo o desenvimento da Equação Implícita da Reta.
+
+````
+y = mx + B                            //  Partimos da Equação Reduzida da Reta
+y = (dy/dx)* x + B                    //  Destrinchando 'm' obtemos '(dy/dx)'
+y * dx = dy * x + B * dx              //  Multiplicando a equação por 'dx'
+dy * x + (-y * dx) + B * dx = 0       //  Igualando a equação a 0
+````
+
+Obtemos:
+````
+_a_ = dy
+_b_ = dx
+_c_ = B * dx
+````
+
+
+
 
