@@ -10,7 +10,7 @@
 
 ### [Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias)
 
-## Introdução
+# Introdução
 
   Este trabalho tem como objetivo apresentar alguns algoritmos para rasterização de linhas em um monitor gráfico diretamente e memória de video, como os sistemas operacionais modernos impedem acesso direto a memória de vídeo, foi utilizado um framework para realizar esta simulação.
 
@@ -61,7 +61,7 @@ void putPixel(Point point)
     FBptr[offset(point) + ALPHA] = point.color.a;		//ALPHA == 3
 }
 ````
-## Rasterização de linhas
+# Rasterização de linhas
 
 Após entender a interação entre monitores e computadores, os algoritmos para traçar retas serão entendidos sem maiores dificuldades.
 
@@ -201,7 +201,7 @@ Execução do algoritmo de Bresenham
 
 ![Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/test%20retas.png?raw=true)
 
-## Resultados
+# Resultados
 
 ### Função _DrawLine_
 
@@ -226,7 +226,7 @@ Desenha triângulos a partir de 03 pontos
 
 ![Triangulos](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/drawTriangle.png?raw=true)
 
-## Problemas encontrados
+# Problemas encontrados
 
 ### Generalizar o algoritmo para traçar retas em todos os octantes
 
@@ -238,7 +238,7 @@ Uma ideia para interporlar cores foi: Incrementar ou decrementar em 1 bit cada c
 
 ![Erro_InterpolaCor](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Erro_Interpola%C3%A7%C3%A3o.png?raw=true)
 
-## Referências
+# Referências
 
 [infoescola - Equacoes da Reta](https://www.infoescola.com/geometria-analitica/equacoes-da-reta/).
 
