@@ -12,6 +12,6 @@
 
 ## Monitores
 
-  Inicialmente devemos imaginar o display como uma matriz (grid) bidimensional, composto por **_m linhas_** e **_n colunas_**, onde no centro de cada posição da matriz existe um ponto com um par de coordenadas _(x,y)_. 
+  Inicialmente devemos imaginar o display como uma matriz _(grid)_ bidimensional, composto por **_m linhas_** e **_n colunas_**, onde no centro de cada posição da matriz existe um ponto com um par de coordenadas _(x,y)_. 
   
-  Note, na figura acima o Ponto_(0,0)_ está situado no topo a esquerda, e o Ponto_(m-1, n-1)_ está posicionado no canto inferior direito. Assim estão dispostos os pontos em um display.
+  Note, na figura acima o Ponto _(0,0)_ está situado no topo a esquerda, e o Ponto _(m-1, n-1)_ está posicionado no canto inferior direito. Assim estão dispostos os pontos em um display.
