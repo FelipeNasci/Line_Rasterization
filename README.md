@@ -37,5 +37,5 @@
 
   Tendo em vista que o color buffer é uma região de memória, e a única informação que temos são as coordenadas no monitor, utilizamos um offset para encontrar a informação para determinada coordenada do monitor.
 
->offset = 4 * (x + y * IMAGE_WIDTH)
+>>offset = 4 * (x + y * IMAGE_WIDTH)
   
