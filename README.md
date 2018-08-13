@@ -178,8 +178,57 @@ if (decisão <= 0){
 	putPixel (xi + 1, yi + 1) //Pixel E
 }
 ````
+_Importante:_ Esta versão do algoritmo de Bresenham funciona apenas para _0° <= angulo <= 1°_ porém podemos obter retas com outros coeficientes angulares por reflexão, como demonstrado na imagem abaixo:
+
+![Bresenham_Octantes](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Bresenham_Octantes.png?raw=true)
+
+## Resultados
+
+### Função _DrawLine_
+
+Traça retas a partir de 02 pontos utilizando o algoritmo de Bresenham
+
+![Retas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Linhas_Octantes.png?raw=true)
+
+### Função _InterporlaçãoCor_
+
+````
+	( COR_pontoA - COR_pontoB ) / DISTANCIA ENTRE OS PONTOS
+	
+	Se o canal_de_cor >= 255 ou canal_de_cor <=0
+		stop_interpolação();
+````
+
+![interpolaCor](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/interpola%C3%A7%C3%A3oCor.png?raw=true)
+
+### Função _DrawTriangle_
+
+Desenha triângulos a partir de 03 pontos
+
+![Triangulos](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/drawTriangle.png?raw=true)
+
+## Problemas encontrados
+
+### Generalizar o algoritmo para traçar retas em todos os octantes
+
+![Erro_Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Erro_Pseudocodigo.png?raw=true)
+
+### Interpolação de cores 
+
+Uma ideia para interporlar cores foi: Incrementar ou decrementar em 1 bit cada canal de cor, até que a cor do canal do ponto de partida fosse igual ao canal de cor do ponto de chegada, porém o npumero de bits necessários é maior do que o disposto para cada canal de cor (geralmente 256 bits).
+
+![Erro_InterpolaCor](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Erro_Interpola%C3%A7%C3%A3o.png?raw=true)
+
+## Debugging - Algoritmo de Bresenham
+
+Execução do algoritmo de Bresenham
+
+![Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/test%20retas.png?raw=true)
 
 ## Referências
 
 [infoescola - Equacoes da Reta](https://www.infoescola.com/geometria-analitica/equacoes-da-reta/)
+[Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)
+ALGORITMO DE BRESENHAM: O USO MICROCONTROLADORES PARA TRAÇAR RETAS EM LCDs - Jefferson Zortea Moro
 
+Notas de aula do professor [http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3)
