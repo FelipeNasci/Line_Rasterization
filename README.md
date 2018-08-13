@@ -1,15 +1,14 @@
 # T1 ICG - Rasterização de Linhas
 
-##
-[Introdução](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#introdu%C3%A7%C3%A3o)
+### [Introdução](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#introdu%C3%A7%C3%A3o)
 
-[Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
+### [Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
 
-[Resultados](https://github.com/FelipeNasci/Line_Rasterization#resultados)
+### [Resultados](https://github.com/FelipeNasci/Line_Rasterization#resultados)
 
-[Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization#problemas-encontrados)
+### [Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization#problemas-encontrados)
 
-[Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias)
+### [Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias)
 
 ## Introdução
 
@@ -134,7 +133,7 @@ Este algoritmo ainda não é o ideal pois são necessários muitos arredondament
 
 Também conhecido como algoritmo do ponto médio, é utilizado para traçar retas de forma incremental, trabalhando apenas com números inteiros.
 
-A ideia do algoritmo é bastante simples, ele utiliza a equação implícita da reta como uma função de decisão, para identificar qual o próximo pixel a ser ativado. Esta função é utilizada de forma incremental em cada pixel. Veja abaixo o desenvimento da Equação Implícita da Reta.
+A ideia do algoritmo é bastante simples, ele utiliza a equação implícita da reta como uma função de decisão, para identificar qual o próximo pixel a ser ativado. Esta função é utilizada de forma incremental em cada pixel. Veja abaixo o desenvolvimento da **Equação Implícita da Reta**.
 
 ````
 y = mx + b                            //  Partimos da Equação Reduzida da Reta
@@ -143,7 +142,7 @@ y * dx = dy * x + b * dx              //  Multiplicando a equação por 'dx'
 dy * x + (-y * dx) + b * dx = 0       //  Igualando a equação a 0
 ````
 
-Realizando as modificações abaixo para melhor entendimento posterior:
+Realizando as modificações abaixo para melhor entendimento:
 
 ````
 α = dy
@@ -164,13 +163,15 @@ Seja m = (x0 + 1, y0 + 1/2) o ponto médio entre os pixels  (x0 + 1, y0 + 1) e  
 
 ![decPontoMedio](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/PontoM%C3%A9dio.png?raw=true)
 
-Note que a reta parte do ponto _(x0, y0)_ logo, não existe decisão tomada anteriormente, podemos identificar o nosso valor de decisão aplicando f(x0 + 1,  y0  + 1/2) - f (x0,  y0)
+Note que a reta parte do ponto _(x0, y0)_ logo, não existe decisão tomada anteriormente, podemos identificar o nosso valor de decisão aplicando f(x0 + 1,  y0  + 1/2) - f (x0,  y0).
+
 ``
  f (m) - f (inicio) =  ax0 + by0 + c + a + b/2 - (ax0 + by0 + c )
  f (m) - f (inicio) = a + b/2
 ``
 
-Logo, nosso valor de decisão é:
+Logo, nosso valor de decisão inicial é:
+
 ````
 d = a + b/2
 ````
