@@ -1,8 +1,12 @@
 # T1 ICG - Rasterização de Linhas
 
+## Sumário
+
+![Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
+
 ## Introdução
 
-  Este trabalho tem como objetivo apresentar alguns algoritmos para rasterização de linhas em um monitor gráfico diretamente e memória de video, como os sistema operacionais modernos impedem acesso direto a memória de vídeo, foi utilizado um framework para realizar esta simulação.
+  Este trabalho tem como objetivo apresentar alguns algoritmos para rasterização de linhas em um monitor gráfico diretamente e memória de video, como os sistemas operacionais modernos impedem acesso direto a memória de vídeo, foi utilizado um framework para realizar esta simulação.
 
   Mas antes, devemos tomar conhecimento do que são primitivas, rasterização, como rasterizar primitivas gráficas e o funcionamento em um monitor gráfico.
   
@@ -18,10 +22,11 @@
 
   Note, nas figuras acima o Ponto _(0,0)_ está situado no topo a esquerda, e o Ponto _(m-1, n-1)_ está posicionado no canto inferior direito. Assim estão dispostos os pontos em um display.
   
-  Outro fato a se observar é a figura "Grid - 2" é uma abstração de "Grid - 1", e esta servirá de modelo para os próximos exemplos.
+  Outro fato a se observar é que a figura "Grid - 2" é uma abstração de "Grid - 1", e esta servirá de modelo para os próximos exemplos.
   
 ## Pixel
-  Um Pixel é um ponto luminoso no monitor, formando uma imagem a partir de um conjunto de pixels. 
+
+  Um Pixel é um ponto luminoso no monitor, uma imagem é formanda a partir de um conjunto de pixels. 
   
   É composto por três canais de cores - Vermelho, Verde e Azul, e mais um canal para tratar a transparência destas cores, chamamos este canal de alpha, compondo um sistema chamado RGBA.
   
@@ -35,11 +40,11 @@
   
   ![ColorBuffer](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/ColorBuffer2.png?raw=true)
 
-  Tendo em vista que o color buffer é uma região de memória, e a única informação que temos são as coordenadas no monitor, utilizamos uma função offset para encontrar a informação para determinada coordenada do monitor.
+  Tendo em vista que o _Color_Buffer_ é uma região de memória, e a única informação que temos são pontos de coordenadas, utilizamos uma função _offset_ para encontrar a informação para determinada coordenada do monitor.
 
 >   offset = 4 * (x + y * IMAGE_WIDTH)
 
-_OBS: O _offset_ encontra a posição de memória de determinado ponto _(x,y)_ , para que seja selecionada uma cor se faz necessário acessar os canais correspondente a cor desejada e informar sua intensidade (0 até 255), como é demonstrado na função putPixel()._
+_**OBS:** O _offset_ encontra a posição de memória de determinado ponto _(x,y)_ , para que seja selecionada uma cor se faz necessário acessar os canais correspondente a cor desejada e informar sua intensidade (0 até 255), como é demonstrado na função putPixel()._
 
 ````C
 void putPixel(Point point)
@@ -63,7 +68,7 @@ Antes de iniciar, assumimos que:
 
 Note que retas que possuem ângulos iguais a 0°, 45° e 90° são triviais de serem rasterizados.
 
-![angulos_triviais](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Pixel%20angulos%200%2090%2045.png?raw=true)
+![angulos_triviais](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Pixel%20angulos%200%2090%2045.jpg?raw=true)
 
 Porém, retas com angulações diferentes demandam um maior esforço para serem desenhadas. A seguir são demonstrados alguns algoritmos para realizar esta tarefa.
 
@@ -227,8 +232,10 @@ Execução do algoritmo de Bresenham
 
 ## Referências
 
-[infoescola - Equacoes da Reta](https://www.infoescola.com/geometria-analitica/equacoes-da-reta/)
-[Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)
-ALGORITMO DE BRESENHAM: O USO MICROCONTROLADORES PARA TRAÇAR RETAS EM LCDs - Jefferson Zortea Moro
+[infoescola - Equacoes da Reta](https://www.infoescola.com/geometria-analitica/equacoes-da-reta/).
+
+[Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm).
+
+ALGORITMO DE BRESENHAM: O USO MICROCONTROLADORES PARA TRAÇAR RETAS EM LCDs - Jefferson Zortea Moro.
 
 Notas de aula do professor [http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3)
