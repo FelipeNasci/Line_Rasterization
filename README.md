@@ -3,6 +3,7 @@
 ## Participantes
 
 Diego Felipe Gonçalves do Nascimento - 20170171680
+
 Glauber Ferreira Ângelo - 20160144357
 
 ### [Introdução](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#introdu%C3%A7%C3%A3o)
