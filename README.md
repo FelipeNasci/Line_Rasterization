@@ -169,3 +169,17 @@ Após identificar qual pixel ativar através da função de decisão, é necess�
 
 ![Escolha_e_ne](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Escolha_e_ne.png?raw=true)
 
+````C
+if (decisão <= 0){
+  d = m3
+ 	putPixel (xi + 1, yi) //Pixel NE
+}else{
+  d = m2
+	putPixel (xi + 1, yi + 1) //Pixel E
+}
+````
+
+## Referências
+
+[infoescola - Equacoes da Reta](https://www.infoescola.com/geometria-analitica/equacoes-da-reta/)
+
