@@ -2,13 +2,13 @@
 
 ### [Introdução](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#introdu%C3%A7%C3%A3o)
 
-### [Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
+### [Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#rasteriza%C3%A7%C3%A3o-de-linhas-1)
 
-### [Resultados](https://github.com/FelipeNasci/Line_Rasterization#resultados)
+### [Resultados](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#resultados-1)
 
-### [Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization#problemas-encontrados)
+### [Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#problemas-encontrados-1)
 
-### [Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias-1)
+### [Referências](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#refer%C3%AAncias-1)
 
 # Introdução
 
@@ -24,7 +24,9 @@
 
   Inicialmente devemos imaginar o display como uma matriz _(grid)_ bidimensional, composto por **_m linhas_** e **_n colunas_**, onde no centro de cada posição da matriz existe um ponto com um par de coordenadas _(x,y)_. 
   
+  
 ![Matriz-Grid](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/grids.png?raw=true)
+
 
   Note, nas figuras acima o Ponto _(0,0)_ está situado no topo a esquerda, e o Ponto _(m-1, n-1)_ está posicionado no canto inferior direito. Assim estão dispostos os pontos em um display.
   
@@ -36,7 +38,9 @@
   
   É composto por três canais de cores - Vermelho, Verde e Azul, e mais um canal para tratar a transparência destas cores, chamamos este canal de alpha, compondo um sistema chamado RGBA.
   
+  
   ![Disposição_Pixel](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Disposi%C3%A7%C3%A3o_Pixel.png?raw=true)
+  
   
   Estas cores são armazenadas em uma região de memória chamada _Color_Buffer_ , que é responsável por armazenar informações da imagem que será rasterizada na tela.
   
@@ -81,7 +85,9 @@ Antes de iniciar, assumimos que:
 
 Note que retas que possuem ângulos iguais a 0°, 45° e 90° são triviais de serem rasterizados.
 
+
 ![angulos_triviais](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Pixel%20angulos%200%2090%2045.jpg?raw=true)
+
 
 Porém, retas com angulações diferentes demandam um maior esforço para serem desenhadas. A seguir são demonstrados alguns algoritmos para realizar esta tarefa.
 
@@ -137,7 +143,9 @@ yi + 1 = y_anterior + m
 yi + 1 = y + m
 ````
 
+
 ![DDA](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/dda.png?raw=true)
+
 
 Este algoritmo ainda não é o ideal pois são necessários muitos arredondamentos de números reais. A seguir será apresentado uma solução melhor aplicável.
 
@@ -173,7 +181,9 @@ Se aplicarmos um ponto na equação implícita e obtivemos 0 como resultado, sig
 
 Seja m = (x0 + 1, y0 + 1/2) o ponto médio entre os pixels  (x0 + 1, y0 + 1) e  (x0 + 1, y0), iremos utilizar a função de decisão para avaliar qual pixel acender.
 
+
 ![decPontoMedio](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/PontoM%C3%A9dio.png?raw=true)
+
 
 Note que a reta parte do ponto _(x0, y0)_ logo, não existe decisão tomada anteriormente, podemos identificar o nosso valor de decisão aplicando f(x0 + 1,  y0  + 1/2) - f (x0,  y0).
 
@@ -192,7 +202,9 @@ d = a + b/2
 
 Após identificar qual pixel ativar através da função de decisão, é necessário verificar qual será o nosso próximo ponto médio, (x0 + 2, y0 + 1/2) ou (x0 + 2, y0 + 3/2)
 
+
 ![Escolha_e_ne](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Escolha_e_ne.png?raw=true)
+
 
 ````C
 if (decisão <= 0){
@@ -203,15 +215,20 @@ if (decisão <= 0){
 	putPixel (xi + 1, yi + 1) //Pixel NE
 }
 ````
+
 _Importante:_ Esta versão do algoritmo de Bresenham funciona apenas para _0° <= angulo <= 1°_ porém podemos obter retas com outros coeficientes angulares por reflexão, como demonstrado na imagem abaixo:
 
+
 ![Bresenham_Octantes](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Bresenham_Octantes.png?raw=true)
+
 
 ## Debugging - Algoritmo de Bresenham
 
 Execução do algoritmo de Bresenham
 
+
 ![Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/test%20retas.png?raw=true)
+
 
 # Resultados
 
@@ -219,7 +236,9 @@ Execução do algoritmo de Bresenham
 
 Traça retas a partir de 02 pontos utilizando o algoritmo de Bresenham
 
+
 ![Retas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Linhas_Octantes.png?raw=true)
+
 
 ### Função _InterporlaçãoCor_
 
@@ -230,25 +249,33 @@ Traça retas a partir de 02 pontos utilizando o algoritmo de Bresenham
 		stop_interpolação();
 ````
 
+
 ![interpolaCor](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/interpola%C3%A7%C3%A3oCor.png?raw=true)
+
 
 ### Função _DrawTriangle_
 
 Desenha triângulos a partir de 03 pontos
 
+
 ![Triangulos](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/drawTriangle.png?raw=true)
+
 
 # Problemas encontrados
 
-### Generalizar o algoritmo para traçar retas em todos os octantes
+* Generalizar o algoritmo para traçar retas em todos os octantes
+
 
 ![Erro_Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Erro_Pseudocodigo.png?raw=true)
 
-### Interpolação de cores 
+
+* Interpolação de cores 
 
 Uma ideia para interporlar cores foi: Incrementar ou decrementar em 1 bit cada canal de cor, até que a cor do canal do ponto de partida fosse igual ao canal de cor do ponto de chegada, porém o npumero de bits necessários é maior do que o disposto para cada canal de cor (geralmente 256 bits).
 
+
 ![Erro_InterpolaCor](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Erro_Interpola%C3%A7%C3%A3o.png?raw=true)
+
 
 # Referências
 
