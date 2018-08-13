@@ -35,7 +35,53 @@
   
   ![ColorBuffer](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/ColorBuffer2.png?raw=true)
 
-  Tendo em vista que o color buffer é uma região de memória, e a única informação que temos são as coordenadas no monitor, utilizamos um offset para encontrar a informação para determinada coordenada do monitor.
+  Tendo em vista que o color buffer é uma região de memória, e a única informação que temos são as coordenadas no monitor, utilizamos uma função offset para encontrar a informação para determinada coordenada do monitor.
 
->>offset = 4 * (x + y * IMAGE_WIDTH)
-  
+>   offset = 4 * (x + y * IMAGE_WIDTH)
+
+_OBS: O _offset_ encontra a posição de memória de determinado ponto _(x,y)_ , para que seja selecionada uma cor se faz necessário acessar os canais correspondente a cor desejada e informar sua intensidade (0 até 255), como é demonstrado na função putPixel()._
+
+````C
+void putPixel(Point point)
+{
+    FBptr[offset(point) + RED] = point.color.r;		  //RED   == 0
+    FBptr[offset(point) + GREEN] = point.color.g;		//GREEN == 1
+    FBptr[offset(point) + BLUE] = point.color.b;		//BLUE  == 2
+    FBptr[offset(point) + ALPHA] = point.color.a;		//ALPHA == 3
+}
+````
+## Rasterização de linhas
+
+Após entender a interação entre monitores e computadores, os algoritmos para traçar retas serão entendidos sem maiores dificuldades.
+
+Antes de iniciar, assumimos que:
+
+>   Δx ≥ Δy, ou seja, 0 <= angulo_reta <= 1
+>   Nosso grid tem apenas coordenadas positivas (maior ou igual a 0)
+    >P(x0,y0) = (0,0)
+>A distância entre cada pixel é 1
+
+Note que retas que possuem ângulos iguais a 0°, 45° e 90° são triviais de serem rasterizados.
+
+![angulos_triviais](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Pixel%20angulos%200%2090%2045.png?raw=true)
+
+Porém, retas com angulações diferentes demandam um maior esforço para serem desenhadas. A seguir são demonstrados alguns algoritmos para realizar esta tarefa.
+
+### Equação geral da reta
+
+Podemos representar uma reta _r_ do plano cartesiano por meio de uma equação. Essa equação pode ser obtida a partir de um ponto A(xA, yA) e do coeficiente angular _m_ dessa reta.
+
+Considere uma reta r não-vertical, de coeficiente angular m, que passa pelo ponto A(xA, yA). Vamos obter a equação dessa reta, tomando um ponto _P(x, y)_ tal que P ≠ A.
+
+Este é o meio mais trivial de se obter uma reta através de dois pontos. Vajamos a seguir seu desenvolvimento.
+
+````
+y - y0 = m * (x - x0)  
+y - y0 = (m * x) + (-m * x0)
+     y = (m * x) + (-m * x0)  + y0
+     y = (m * x) + [ (-m * x0)  + y0 ]
+     y = m * x + b
+````
+![Eq_Geral_Reta](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Equa%C3%A7%C3%A3o%20Geral.png?raw=true)
+
+
