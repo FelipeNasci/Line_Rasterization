@@ -172,10 +172,10 @@ Após identificar qual pixel ativar através da função de decisão, é necess�
 ````C
 if (decisão <= 0){
   d = m3
- 	putPixel (xi + 1, yi) //Pixel NE
+ 	putPixel (xi + 1, yi) //Pixel E
 }else{
   d = m2
-	putPixel (xi + 1, yi + 1) //Pixel E
+	putPixel (xi + 1, yi + 1) //Pixel NE
 }
 ````
 _Importante:_ Esta versão do algoritmo de Bresenham funciona apenas para _0° <= angulo <= 1°_ porém podemos obter retas com outros coeficientes angulares por reflexão, como demonstrado na imagem abaixo:
