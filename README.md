@@ -8,7 +8,7 @@
 
 ### [Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization#problemas-encontrados)
 
-### [Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias)
+### [Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias-1)
 
 # Introdução
 
