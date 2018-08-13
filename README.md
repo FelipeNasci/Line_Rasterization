@@ -1,29 +1,13 @@
 # T1 ICG - Rasterização de Linhas
 
-## Sumário
+##
 [Introdução](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#introdu%C3%A7%C3%A3o)
-
-[Rasterização](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#rasteriza%C3%A7%C3%A3o)
-
-[Monitores](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#monitores)
-
-[Pixel](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#pixel)
 
 [Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
 
-[Equação geral da reta](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
-
-[DDA](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#dda)
-
-[Algoritmo de Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#algoritmo-de-bresenham)
-
-[Resultados]https://github.com/FelipeNasci/Line_Rasterization#resultados)
+[Resultados](https://github.com/FelipeNasci/Line_Rasterization#resultados)
 
 [Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization#problemas-encontrados)
-
-[Interpolação de cores](https://github.com/FelipeNasci/Line_Rasterization#interpola%C3%A7%C3%A3o-de-cores)
-
-[Debugging - Algoritmo de Bresenham](https://github.com/FelipeNasci/Line_Rasterization#debugging---algoritmo-de-bresenham)
 
 [Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias)
 
@@ -210,6 +194,12 @@ _Importante:_ Esta versão do algoritmo de Bresenham funciona apenas para _0° <
 
 ![Bresenham_Octantes](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Bresenham_Octantes.png?raw=true)
 
+## Debugging - Algoritmo de Bresenham
+
+Execução do algoritmo de Bresenham
+
+![Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/test%20retas.png?raw=true)
+
 ## Resultados
 
 ### Função _DrawLine_
@@ -246,12 +236,6 @@ Desenha triângulos a partir de 03 pontos
 Uma ideia para interporlar cores foi: Incrementar ou decrementar em 1 bit cada canal de cor, até que a cor do canal do ponto de partida fosse igual ao canal de cor do ponto de chegada, porém o npumero de bits necessários é maior do que o disposto para cada canal de cor (geralmente 256 bits).
 
 ![Erro_InterpolaCor](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Erro_Interpola%C3%A7%C3%A3o.png?raw=true)
-
-## Debugging - Algoritmo de Bresenham
-
-Execução do algoritmo de Bresenham
-
-![Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/test%20retas.png?raw=true)
 
 ## Referências
 
