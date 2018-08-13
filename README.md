@@ -1,8 +1,31 @@
 # T1 ICG - Rasterização de Linhas
 
 ## Sumário
+[Introdução](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#introdu%C3%A7%C3%A3o)
+
+[Rasterização](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#rasteriza%C3%A7%C3%A3o)
+
+[Monitores](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#monitores)
+
+[Pixel](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#pixel)
 
 [Rasterização de linhas](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
+
+[Equação geral da reta](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#equa%C3%A7%C3%A3o-geral-da-reta)
+
+[DDA](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#dda)
+
+[Algoritmo de Bresenham](https://github.com/FelipeNasci/Line_Rasterization/blob/master/README.md#algoritmo-de-bresenham)
+
+[Resultados]https://github.com/FelipeNasci/Line_Rasterization#resultados)
+
+[Problemas encontrados](https://github.com/FelipeNasci/Line_Rasterization#problemas-encontrados)
+
+[Interpolação de cores](https://github.com/FelipeNasci/Line_Rasterization#interpola%C3%A7%C3%A3o-de-cores)
+
+[Debugging - Algoritmo de Bresenham](https://github.com/FelipeNasci/Line_Rasterization#debugging---algoritmo-de-bresenham)
+
+[Referências](https://github.com/FelipeNasci/Line_Rasterization#refer%C3%AAncias)
 
 ## Introdução
 
@@ -238,4 +261,4 @@ Execução do algoritmo de Bresenham
 
 ALGORITMO DE BRESENHAM: O USO MICROCONTROLADORES PARA TRAÇAR RETAS EM LCDs - Jefferson Zortea Moro.
 
-Notas de aula do professor [http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3)
+Notas de aula do professor [Christian Azambuja Pagot](http://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4792938P3)
