@@ -150,3 +150,22 @@ Se aplicarmos um ponto na equação implícita e obtivemos 0 como resultado, sig
 
 Seja m = (x0 + 1, y0 + 1/2) o ponto médio entre os pixels  (x0 + 1, y0 + 1) e  (x0 + 1, y0), iremos utilizar a função de decisão para avaliar qual pixel acender.
 
+![decPontoMedio](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/PontoM%C3%A9dio.png?raw=true)
+
+Note que a reta parte do ponto _(x0, y0)_ logo, não existe decisão tomada anteriormente, podemos identificar o nosso valor de decisão aplicando f(x0 + 1,  y0  + 1/2) - f (x0,  y0)
+``
+ f (m) - f (inicio) =  ax0 + by0 + c + a + b/2 - (ax0 + by0 + c )
+ f (m) - f (inicio) = a + b/2
+``
+
+Logo, nosso valor de decisão é:
+````
+d = a + b/2
+````
+
+![pontoMedio](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Ponto_m%C3%A9dio.png?raw=true)
+
+Após identificar qual pixel ativar através da função de decisão, é necessário verificar qual será o nosso próximo ponto médio, (x0 + 2, y0 + 1/2) ou (x0 + 2, y0 + 3/2)
+
+![Escolha_e_ne](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Escolha_e_ne.png?raw=true)
+
