@@ -15,7 +15,140 @@
 
 
 
+/******************************************************/
+/*******  ALGORITMO DE BRESENHAM - PONTO MEDIO  *******/
+/*******    PARA RASTERIZAR LINHAS UTILIZANDO   *******/
+/*******          APENAS NUMEROS INTEIROS       *******/
+/******************************************************/
 
+void drawLine(Point pointA, Point pointB)
+{
+
+    if(pointA.x > pointB.x){
+        drawLine(pointB, pointA);
+        return;
+    }
+
+    int dx = pointB.x - pointA.x;
+    int dy = pointB.y - pointA.y;
+
+    if(abs(dx) >= abs(dy))
+        dxdy(pointA, pointB);
+    else
+        dydx(pointA, pointB);
+}
+
+void dxdy(Point pointA, Point pointB)
+{
+
+    int dy = pointB.y - pointA.y;
+    int dx = pointB.x - pointA.x;
+
+    if(dy > 0){
+
+        int d_new = 2*dy - dx;
+        int inc_E = 2*dy;
+        int inc_NE = 2*dy - 2*dx;
+
+        while(pointA.x <= pointB.x){
+
+            putPixel(pointA);
+            pointA.x++;
+
+            if (d_new < 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointA.y ++;
+            }
+
+            interpolaCor (&pointA, pointB);
+        }
+    }
+    else{
+
+        int d_new = 2 * dy + dx;
+        int inc_E = 2 * dy;
+        int inc_NE = 2 * dy + 2 * dx;
+
+            while(pointA.x <= pointB.x){
+
+            putPixel(pointA);
+            pointA.x++;
+
+            if (d_new > 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointA.y--;
+            }
+
+            interpolaCor (&pointA, pointB);
+        }
+
+    }
+
+
+}
+
+void dydx (Point pointA, Point pointB)
+{
+
+    int dy = pointB.y - pointA.y;
+    int dx = pointB.x - pointA.x;
+
+    if(dy >= 0){
+
+        int d_new = dy - 2* dx;
+        int inc_E = -2*dx;
+        int inc_NE = 2*dy - 2*dx;
+
+        while(pointA.y <= pointB.y){
+
+            putPixel(pointA);
+            pointA.y++;
+
+            if (d_new > 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointA.x++;
+            }
+
+            interpolaCor (&pointA, pointB);
+        }
+
+    }
+    else{
+
+        int d_new = dy + 2*dx;
+        int inc_E = 2*dx;
+        int inc_NE = 2*dy + 2*dx;
+
+        while(pointA.y >= pointB.y){
+
+            putPixel(pointA);
+            pointA.y--;
+
+            if (d_new < 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointA.x ++;
+            }
+
+            interpolaCor (&pointA, pointB);
+        }
+
+
+    }
+
+}
+
+
+/******************************************************/
+/*******    INTERPOLA CORES ENTRE OS PONTOS     *******/
+/******************************************************/
 
 void interpolaCor(Point *pointA, Point pointB)
 {
@@ -34,7 +167,7 @@ void interpolaCor(Point *pointA, Point pointB)
 
 
     /************************************************************************/
-    /*****                  A COR AUXILIAR E IGUAL A:                   *****/
+    /*****                 A COR AUXILIAR EH IGUAL A:                   *****/
     /*****  ( COR_PONTO_A - COR_PONTO_B ) / DISTANCIA ENTRE OS PONTOS   *****/
     /************************************************************************/
 
@@ -76,184 +209,19 @@ void interpolaCor(Point *pointA, Point pointB)
 /*******       DESENHA TRIANGULOS NA TELA       *******/
 /******************************************************/
 
-void drawTriangle()
+void drawTriangle(Point pointA, Point pointB, Point pointC, short fill_)
 {
 
-    Color cor;
-    Point point1, point2, point3;
-
-    // PRIMEIRO TRIANGULO
-
-    point1.x = 40;
-    point1.y = 10;
-
-    point2.x = 20;
-    point2.y = 120;
-
-    point3.x = 60;
-    point3.y = 120;
-
-    fill_Triangle(point1, point2, point3);
-
-//  drawLine(point1, point2);
-//  drawLine(point1, point3);
-//  drawLine(point2, point3);
-//------------------------------------------
-
-    point1.color.r = 255;
-    point1.color.g = 0;
-    point1.color.b = 255;
-
-    point2.color.r = 100;
-    point2.color.g = 0;
-    point2.color.b = 100;
-
-    point3.color.r = 150;
-    point3.color.g = 0;
-    point3.color.b = 0;
-
-
-    //  SEGUNDO TRIANGULO
-
-        point1.x = 70;
-        point1.y = 10;
-
-        point2.x = 110;
-        point2.y = 10;
-
-        point3.x = 90;
-        point3.y = 120;
-
-
-//        fill_Triangle(point1, point2, point3);
-
-        drawLine(point1, point2);
-        drawLine(point1, point3);
-        drawLine(point2, point3);
-
-    //------------------------------------------
-
-    //  TERCEIRO TRIANGULO
-
-        point1.x = 300;
-        point1.y = 20;
-
-        point2.x = 300;
-        point2.y = 240;
-
-        point3.x = 400;
-        point3.y = 110;
-
-        fill_Triangle(point1, point2, point3);
-
-//        drawLine(point1, point2);
-//        drawLine(point1, point3);
-//        drawLine(point2, point3);
+    if(fill_ == 1)
+        fill_Triangle(pointA, pointB, pointC);
+    else{
+        drawLine(pointA, pointB);
+        drawLine(pointA, pointC);
+        drawLine(pointB, pointC);
+    }
 
 }
 
-
-/******************************************************/
-/*******  ALGORITMO DE BRESENHAM - PONTO MEDIO  *******/
-/*******    PARA RASTERIZAR LINHAS UTILIZANDO   *******/
-/*******          APENAS NUMEROS INTEIROS       *******/
-/******************************************************/
-
-void drawLine(Point pointA, Point pointB)
-{
-
-    if( pointA.x > pointB.x ){
-
-        drawLine(pointB, pointA);
-        return;
-    }
-
-    int dx, dy, inc_E, inc_NE, d_new;
-    short slope = 1;
-
-    dy = pointB.y - pointA.y;
-    dx = pointB.x - pointA.x;
-
-    if( abs(dx) >= abs(dy))             //  |dx|>|dy| nos 02 quadrantes
-    {
-        if( dy < 0){                    //  RESPONSAVEL PELA
-            slope = -slope;             //  MUDANCA DE QUADRANTE
-            dy = -dy;                   //  FAZ y DECREMENTAR
-        }
-
-        /*************************************/
-        /** APENAS UMA SITUACAO É RELEVANTE **/
-        /**     PARA DECISAO SITUACOES:     **/
-        /**                                 **/
-        /**  dx > dy; F(x + 1 , y + 1/2)    **/
-        /**           desicao = 2dy - dx    **/
-        /**           inc_e   = 2dx         **/
-        /**           inc_NE  = 2*(dy - dx) **/
-        /*************************************/
-
-        d_new = 2*dy - dx;                          //  FUNCAO DE DECISAO
-        inc_E = 2*dy;                               //  y PERMANECE
-        inc_NE = 2*dy - 2*dx;                       //  y AVANCA UM PIXEL
-
-        while(pointA.x <= pointB.x){
-
-            putPixel(pointA);
-            pointA.x++;
-
-            if (d_new < 0)
-                d_new += inc_E;
-            else{
-                d_new += inc_NE;
-                pointA.y += slope;
-            }
-
-            interpolaCor (&pointA, pointB);
-
-        }
-    }
-    else
-    {
-        if(dy > 0)                          //  slope FUNCIONA COMO UM SINAL
-            slope = -1;                     //  DE ACORDO COM A INCLINACAO DA RETA
-
-                                            /*********************************/
-        d_new = dy + slope * 2*dx;          /** MODIFICACOES FEITAS PARA    **/
-        inc_E = slope * 2*dx;               /**     DIMINUIR QUANTIDADE DE  **/
-        inc_NE = 2*dy + slope * 2*dx;       /**             CODIGO          **/
-                                            /*********************************/
-
-        /**************************************************************************/
-        /**                           02 SITUACOES:                              **/
-        /**                                                                      **/
-        /**  dy > 0; F(x + 1/2 , y - 1)     ****  dy < 0; F(x + 1/2 , y + 1)     **/
-        /**          desicao = dy - 2dx     ****          desicao = dy + 2dx     **/
-        /**          inc_e   = -2dx         ****          inc_e   = 2dx          **/
-        /**          inc_NE  = 2*(dy - dx)  ****          inc_NE  = 2*(dy + dx)  **/
-        /**                                 ****                                 **/
-        /**************************************************************************/
-
-        if(slope < 0){                      //  INVERTE OS SINAIS PARA DECISAO DO
-            inc_E = -inc_E;                 //  INCREMENTO DE x - ISTO INFLUI NA
-            inc_NE = -inc_NE;               //  DECISAO
-        }
-
-        while(pointA.y != pointB.y){
-
-            putPixel(pointA);
-            pointA.y += -slope;
-
-            if (d_new < 0)
-                d_new += inc_E;
-            else{
-                d_new += inc_NE;
-                pointA.x ++;            //  Y INCREMENTA OU DECREMENTA (DEPENDE DE dy)
-            }
-
-            interpolaCor (&pointA, pointB);
-        }
-    }
-
-}
 
 /******************************************************/
 /*******     PREENCHE UM TRIANGULO DADO         *******/
@@ -334,6 +302,65 @@ if( pointB.x > pointC.x ){
     }
 
 
+}
+
+
+void drawCirculo(int xC, int yC, int r){
+
+    Point pointA;
+    Point ponto;
+
+    int x = 0, y  = r, u = 1, v = 2*r-1, e = 0;
+
+    while(x < y){
+
+        ponto.x = xC + x;
+        ponto.y = yC + y;
+        putPixel(ponto);
+
+        ponto.x = xC + y;
+        ponto.y = yC - x;
+        putPixel(ponto);
+
+        ponto.x = xC - x;
+        ponto.y = yC - y;
+        putPixel(ponto);
+
+        ponto.x = xC - y;
+        ponto.y = yC + x;
+        putPixel(ponto);
+
+        x++;
+        e = e + u;
+        u = u + 2;
+
+        if(v < 2*e){
+            y--;
+            e = e - v;
+            v = v - 2;
+        }
+
+        if(x > y){
+            break;
+        }
+
+        ponto.x = xC + y;
+        ponto.y = yC + x;
+        putPixel(ponto);
+
+        ponto.x = xC + x;
+        ponto.y = yC - y;
+        putPixel(ponto);
+
+        ponto.x = xC - y;
+        ponto.y = yC - x;
+        putPixel(ponto);
+
+        ponto.x = xC - x;
+        ponto.y = yC + y;
+        putPixel(ponto);
+
+    }
 }
 
 /******************************************************/
@@ -546,12 +573,115 @@ void DDA (Point pointA, Point pointB)
 
 }
 
+/******************************************************/
+/*******       ALGORITMO DE BRESENHAM           *******/
+/*****   EMBORA A FUNCAO DRAWLINE() JA UTILIZE  *******/
+/*****  ESTE ALGORITMO. TEMOS AQUI UMA VERSAO   *******/
+/*****  COM QUANTIDADE MENOR DE LINHAS DE       *******/
+/*****       CODIGO, POREM MENOS DIDATICO       *******/
+/******************************************************/
+
+void bresenham(Point pointA, Point pointB)
+{
+
+    if( pointA.x > pointB.x ){
+
+        drawLine(pointB, pointA);
+        return;
+    }
+
+    int dx, dy, inc_E, inc_NE, d_new;
+    short slope = 1;
+
+    dy = pointB.y - pointA.y;
+    dx = pointB.x - pointA.x;
+
+    if( abs(dx) >= abs(dy))             //  |dx|>|dy| nos 02 quadrantes
+    {
+        if( dy < 0){                    //  RESPONSAVEL PELA
+            slope = -slope;             //  MUDANCA DE QUADRANTE
+            dy = -dy;                   //  FAZ y DECREMENTAR
+        }
+
+        /*************************************/
+        /** APENAS UMA SITUACAO É RELEVANTE **/
+        /**     PARA DECISAO SITUACOES:     **/
+        /**                                 **/
+        /**  dx > dy; F(x + 1 , y + 1/2)    **/
+        /**           desicao = 2dy - dx    **/
+        /**           inc_e   = 2dx         **/
+        /**           inc_NE  = 2*(dy - dx) **/
+        /*************************************/
+
+        d_new = 2*dy - dx;                          //  FUNCAO DE DECISAO
+        inc_E = 2*dy;                               //  y PERMANECE
+        inc_NE = 2*dy - 2*dx;                       //  y AVANCA UM PIXEL
+
+        while(pointA.x <= pointB.x){
+
+            putPixel(pointA);
+            pointA.x++;
+
+            if (d_new < 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointA.y += slope;
+            }
+
+            interpolaCor (&pointA, pointB);
+
+        }
+    }
+    else
+    {
+        if(dy > 0)                          //  slope FUNCIONA COMO UM SINAL
+            slope = -1;                     //  DE ACORDO COM A INCLINACAO DA RETA
+
+                                            /*********************************/
+        d_new = dy + slope * 2*dx;          /** MODIFICACOES FEITAS PARA    **/
+        inc_E = slope * 2*dx;               /**     DIMINUIR QUANTIDADE DE  **/
+        inc_NE = 2*dy + slope * 2*dx;       /**             CODIGO          **/
+                                            /*********************************/
+
+        /**************************************************************************/
+        /**                           02 SITUACOES:                              **/
+        /**                                                                      **/
+        /**  dy < 0; F(x + 1/2 , y - 1)     ****  dy > 0; F(x + 1/2 , y + 1)     **/
+        /**          desicao = dy - 2dx     ****          desicao = dy + 2dx     **/
+        /**          inc_e   = -2dx         ****          inc_e   = 2dx          **/
+        /**          inc_NE  = 2*(dy - dx)  ****          inc_NE  = 2*(dy + dx)  **/
+        /**                                 ****                                 **/
+        /**************************************************************************/
+
+        if(slope < 0){                      //  INVERTE OS SINAIS PARA DECISAO DO
+            inc_E = -inc_E;                 //  INCREMENTO DE x - ISTO INFLUI NA
+            inc_NE = -inc_NE;               //  DECISAO
+        }
+
+        while(pointA.y != pointB.y){
+
+            putPixel(pointA);
+            pointA.y += -slope;
+
+            if (d_new < 0)
+                d_new += inc_E;
+            else{
+                d_new += inc_NE;
+                pointA.x ++;            //  Y INCREMENTA OU DECREMENTA (DEPENDE DE dy)
+            }
+
+            interpolaCor (&pointA, pointB);
+        }
+    }
+
+}
+
 
 /******************************************************/
 /*******     TESTE DA FUNCAO PUT_PIXEL()        *******/
 /*******     IMPRESSAO DE VARIOS PONTOS         *******/
 /******************************************************/
-
 
 void pixel()
 {
@@ -630,6 +760,61 @@ void line(){
 
 }
 
+/******************************************************/
+/*******    TESTE DA FUNCAO DRAWTRIANGLE()      *******/
+/*******     IMPRESSAO DE VARIOS TRIANGULOS     *******/
+/******************************************************/
+
+void triangle(){
+
+   Point pointA, pointB, pointC;
+
+    srand( (unsigned) time(NULL));      //GERA NUMEROS ALEATORIOS
+
+    int limite = 4;                     //  Limite de triangulos por frame
+    short fill_;                        //  Decide se preenche o triangulo
+
+    Color cor;
+    cor.r = 0;
+    cor.g = 0;
+    cor.b = 0;
+
+    clearScreen(cor);
+
+    for (int i = 0; i < limite; i++)
+    {
+        fill_ = rand() % 2;
+
+        pointA.x = rand() % IMAGE_WIDTH;
+        pointA.y = rand() % IMAGE_HEIGHT;
+
+        pointA.color.r = rand() % 255;
+        pointA.color.g = rand() % 255;
+        pointA.color.b = rand() % 255;
+        pointA.color.a = rand() % 255;
+
+        pointB.x = rand() % IMAGE_WIDTH;
+        pointB.y = rand() % IMAGE_HEIGHT;
+
+        pointB.color.r = rand() % 255;
+        pointB.color.g = rand() % 255;
+        pointB.color.b = rand() % 255;
+        pointB.color.a = rand() % 255;
+
+        pointC.x = rand() % IMAGE_WIDTH;
+        pointC.y = rand() % IMAGE_HEIGHT;
+
+        pointB.color.r = rand() % 255;
+        pointB.color.g = rand() % 255;
+        pointB.color.b = rand() % 255;
+        pointB.color.a = rand() % 255;
+
+        drawTriangle(pointA, pointB, pointC, fill_);
+
+     }
+
+}
+
 
 /******************************************************/
 /*******     LIMPA A TELA COM UMA COR           *******/
@@ -642,8 +827,8 @@ void clearScreen(Color cor){
 
     p.color = cor;
 
-    for(p.x = 0; p.x < IMAGE_WIDTH; p.x++)
-        for (p.y = 0; p.y < IMAGE_HEIGHT; p.y++)
+    for(p.y = 0; p.y < IMAGE_HEIGHT; p.y++)
+        for (p.x = 0; p.x < IMAGE_WIDTH; p.x++)
             putPixel(p);
 
 }
