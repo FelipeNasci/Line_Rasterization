@@ -131,13 +131,18 @@ y * dx = dy * x + B * dx              //  Multiplicando a equação por 'dx'
 dy * x + (-y * dx) + B * dx = 0       //  Igualando a equação a 0
 ````
 
-Obtemos:
+Realizando as modificações abaixo para melhor entendimento posterior:
+
 ````
-_a_ = dy
-_b_ = dx
-_c_ = B * dx
+a = dy
+b = dx
+c = B * dx
 ````
 
+Obtemos:
+````
+>decisão = f(x,y) = ax + by + c = 0
+````
 
 
 
