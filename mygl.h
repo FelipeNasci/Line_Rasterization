@@ -13,8 +13,6 @@
 //*****************************************************************************
 // Defina aqui as suas funções gráficas
 
-
-
 /******************************************************/
 /*******  ALGORITMO DE BRESENHAM - PONTO MEDIO  *******/
 /*******    PARA RASTERIZAR LINHAS UTILIZANDO   *******/
@@ -212,7 +210,7 @@ void interpolaCor(Point *pointA, Point pointB)
 void drawTriangle(Point pointA, Point pointB, Point pointC, short fill_)
 {
 
-    if(fill_ == 1)
+    if(fill_)
         fill_Triangle(pointA, pointB, pointC);
     else{
         drawLine(pointA, pointB);

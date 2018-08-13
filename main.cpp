@@ -24,7 +24,7 @@ void MyGlDraw(void) {
 
     //  pixel();
     //  line();
-    //  triangle();
+      triangle();
 
 
 }
