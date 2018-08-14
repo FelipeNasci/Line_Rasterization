@@ -20,7 +20,7 @@ Glauber Ferreira Ângelo - 20160144357
 
   Este trabalho tem como objetivo apresentar alguns algoritmos para rasterização de linhas em um monitor gráfico diretamente e memória de video, como os sistemas operacionais modernos impedem acesso direto a memória de vídeo, foi utilizado um framework para realizar esta simulação.
 
-  Mas antes, devemos tomar conhecimento do que são primitivas, rasterização, como rasterizar primitivas gráficas e o funcionamento em um monitor gráfico.
+  Mas antes, devemos conhecer alguns conceitos como: primitivas, rasterização, como rasterizar primitivas gráficas e o funcionamento em um monitor gráfico.
   
 ## Rasterização
 
@@ -47,6 +47,32 @@ Glauber Ferreira Ângelo - 20160144357
   
   ![Disposição_Pixel](https://github.com/FelipeNasci/Line_Rasterization/blob/master/images/Disposi%C3%A7%C3%A3o_Pixel.png?raw=true)
   
+  Para uma melhor clareza de código, foram utilizadas 02 estruturas:
+
+* Define a intensidade das cores, onde 0 significa ausência de cor e 255 a intensidade máxima
+
+```C
+typedef struct Color
+{   //INTENSIDADE DAS CORES
+    int r = 255;
+    int g = 255;
+    int b = 255;
+    int a = 0;
+} Color;
+```
+
+* Define um pixel na tela, possui coordenadas _(x,y)_ e uma _cor_
+
+```C
+typedef struct Point
+{
+    int x;
+    int y;
+
+    struct Color color;
+
+} Point;
+  ```
   
   Estas cores são armazenadas em uma região de memória chamada _Color_Buffer_ , que é responsável por armazenar informações da imagem que será rasterizada na tela.
   
@@ -71,7 +97,7 @@ _**OBS:** O _offset_ encontra a posição de memória de determinado ponto _(x,y
 ````C
 void putPixel(Point point)
 {
-    FBptr[offset(point) + RED] = point.color.r;		  //RED   == 0
+    FBptr[offset(point) + RED] = point.color.r;		  	//RED   == 0
     FBptr[offset(point) + GREEN] = point.color.g;		//GREEN == 1
     FBptr[offset(point) + BLUE] = point.color.b;		//BLUE  == 2
     FBptr[offset(point) + ALPHA] = point.color.a;		//ALPHA == 3
